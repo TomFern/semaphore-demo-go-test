@@ -18,6 +18,11 @@ blocks:
             - go get
             - go build -o ./bin/main
             - cache store $(checksum main.go) bin
+      prologue:
+        commands:
+          - sudo apt update
+          - sudo apt install golang
+          - go version
   - name: Check code style
     task:
       jobs:
@@ -26,12 +31,19 @@ blocks:
             - checkout
             - '#sem-version go 1.21'
             - gofmt main.go | diff --ignore-tab-expansion main.go -
+      prologue:
+        commands:
+          - sudo apt update
+          - sudo apt install golang
+          - go version
   - name: Run tests
     task:
       prologue:
         commands:
+          - sudo apt update
+          - sudo apt install golang
+          - go version
           - checkout
-          - '#sem-version go 1.21'
       jobs:
         - name: Test web server
           commands:
