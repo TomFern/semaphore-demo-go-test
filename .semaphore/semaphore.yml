@@ -13,7 +13,7 @@ name: Semaphore Go CI example
 # and https://docs.semaphoreci.com/article/32-ubuntu-1804-image
 agent:
   machine:
-    type: f1-standard-2
+    type: e1-standard-1
     os_image: ubuntu2204
 
 # Blocks are the heart of a pipeline and are executed sequentially.
