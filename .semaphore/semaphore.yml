@@ -17,7 +17,7 @@ blocks:
             - '#sem-version go 1.21'
             - go get
             - go build -o ./bin/main
-            - '#cache store $(checksum main.go) bin'
+            - cache store $(checksum main.go) bin
   - name: Check code style
     task:
       jobs:
@@ -35,7 +35,7 @@ blocks:
       jobs:
         - name: Test web server
           commands:
-            - '#cache restore $(checksum main.go)'
+            - cache restore $(checksum main.go)
             - ./bin/main 8001 &
             - 'curl --silent localhost:8001/time | grep "The current time is"'
       epilogue:
