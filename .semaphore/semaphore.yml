@@ -27,6 +27,8 @@ blocks:
             - go get
             - go build -o ./bin/main
             - cache store $(checksum main.go) bin
+      secrets:
+        - name: aws-cache-bucket
   - name: Check code style
     task:
       jobs:
@@ -35,6 +37,8 @@ blocks:
             - checkout
             - '#sem-version go 1.21'
             - gofmt main.go | diff --ignore-tab-expansion main.go -
+      secrets:
+        - name: aws-cache-bucket
   - name: Run tests
     task:
       prologue:
@@ -51,6 +55,8 @@ blocks:
         always:
           commands:
             - test-results publish junit.xml
+      secrets:
+        - name: aws-cache-bucket
 after_pipeline:
   task:
     jobs:
